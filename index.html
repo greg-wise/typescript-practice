@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tile Calculator</title>
+</head>
+<body>
+<tile-calc />
+<script>
+class TileCalc extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback() {
+    
+    const shadowRoot = this.attachShadow({mode: 'open'});
+    let inputHeight = this.#fieldConfiguration('Height');
+    let inputWidth = this.#fieldConfiguration('Width');
+    let submitButton = document.createElement('button')
+    let container = document.createElement('div');
+
+    submitButton.innerText = 'submit size';
+
+    submitButton?.addEventListener("click", () => this.#calcFields());<<<<FINISH THIS
+
+
+
+    container.appendChild(inputHeight);
+    container.appendChild(inputWidth);
+    container.appendChild(submitButton);
+     
+
+    shadowRoot.appendChild(container);
+
+
+    
+  }
+
+  #fieldConfiguration(name) {
+    let container = document.createElement('div');
+    let inputHeight = document.createElement('input');
+    let inputLabel = document.createElement('label');
+
+    container.appendChild(inputLabel);
+    inputLabel.setAttribute("for", name.toLowerCase());
+    inputHeight.setAttribute("id", name.toLowerCase());
+    inputLabel.innerText = name + " :";
+
+    container.appendChild(inputHeight);
+
+    return container;
+  }
+
+
+}
+
+customElements.define("tile-calc", TileCalc);
+
+
+</script>
+
+</body>
+</html>
