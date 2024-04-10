@@ -70,7 +70,7 @@ class TileCalc extends HTMLElement {
     let squareFootage = heightVal * widthVal;
     console.log(squareFootage);
 
-    resultcontainer.innerText = squareFootage + " square feet";
+    resultcontainer.innerText = squareFootage.toLocaleString() + " square feet";
   }
 
 }
