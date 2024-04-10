@@ -7,26 +7,34 @@
 <tile-calc />
 <script>
 class TileCalc extends HTMLElement {
+
+  #widthName = 'width';
+  #heightName = 'height';
+  #resultText = 'result';
+
   constructor() {
     super();
   }
   connectedCallback() {
     
     const shadowRoot = this.attachShadow({mode: 'open'});
-    let inputHeight = this.#fieldConfiguration('Height');
-    let inputWidth = this.#fieldConfiguration('Width');
+    let inputHeight = this.#fieldConfiguration(this.#heightName);
+    let inputWidth = this.#fieldConfiguration(this.#widthName);
     let submitButton = document.createElement('button')
     let container = document.createElement('div');
+    let result = document.createElement('p')
+    result.setAttribute("id", this.#resultText.toLowerCase());
 
     submitButton.innerText = 'submit size';
 
-    submitButton?.addEventListener("click", () => this.#calcFields());<<<<FINISH THIS
+    submitButton?.addEventListener("click", () => this.#calcFields());
 
 
 
     container.appendChild(inputHeight);
     container.appendChild(inputWidth);
     container.appendChild(submitButton);
+    container.appendChild(result);
      
 
     shadowRoot.appendChild(container);
@@ -43,13 +51,27 @@ class TileCalc extends HTMLElement {
     container.appendChild(inputLabel);
     inputLabel.setAttribute("for", name.toLowerCase());
     inputHeight.setAttribute("id", name.toLowerCase());
+  
     inputLabel.innerText = name + " :";
 
     container.appendChild(inputHeight);
 
     return container;
   }
+  #calcFields() {
+    let width = this.shadowRoot.getElementById(this.#widthName);
+    let widthVal = width.value;
+    let resultcontainer = this.shadowRoot.getElementById(this.#resultText);
+    console.log(widthVal);
 
+    let height = this.shadowRoot.getElementById(this.#heightName);
+    let heightVal = height.value;
+
+    let squareFootage = heightVal * widthVal;
+    console.log(squareFootage);
+
+    resultcontainer.innerText = squareFootage + " square feet";
+  }
 
 }
 
